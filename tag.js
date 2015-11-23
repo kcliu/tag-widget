@@ -14,6 +14,11 @@ function fetchJSON(url, callback) {
     httpRequest.send("");
 }
 
+function searchCity(input) {
+    console.log("search city:" + input.value);
+
+}
+
 fetchJSON('https://raw.githubusercontent.com/kcliu/tag-widget/master/tz.json', function(data){
     console.log(data);
 });
