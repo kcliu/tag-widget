@@ -1,5 +1,39 @@
+.search-wrapper {
+    position: relative;
+}
+
 .input-area {
     width: 500px;
     font-size: 14px;
     line-height: 20px;
+}
+
+.tagbox {
+    position: absolute;
+    display: block;
+    padding: 1px;
+    left: 100px;
+    width: 500px;
+    border: 1px solid black;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100px;
+}
+
+.tagbox-item {
+    width: 500px;
+    height: 20px;
+}
+
+.tagbox-item.selected {
+    background: orange;
+}
+
+.tagbox-item:hover {
+    cursor: default;
+    background: orange;
+}
+
+.hide {
+    display: none !important;
 }

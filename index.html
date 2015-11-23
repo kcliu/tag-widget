@@ -8,9 +8,22 @@
 </head>
 <body>
     <h2>tag widget</h2>
-    <label for="input-area">Search a City :</label>
-    <input type="text" id="input-area" class="input-area" oninput="searchCity(this);">
-    </input>
+    <div class="search-wrapper">
+        <label for="input-area">Search a City :</label>
+        <input type="text" id="js-input-area" class="input-area" oninput="searchCity(this);">
+        <div id="js-tagbox" class="tagbox hide">
+            <div class="tagbox-item" onclick="createTag(this);">Taipei</div>
+            <div class="tagbox-item">Chiayi</div>
+            <div class="tagbox-item">Nantou</div>
+            <div class="tagbox-item">kaoshiun</div>
+            <div class="tagbox-item">Tainan</div>
+            <div class="tagbox-item">Taipei</div>
+            <div class="tagbox-item">Chiayi</div>
+            <div class="tagbox-item">Nantou</div>
+            <div class="tagbox-item">kaoshiun</div>
+            <div class="tagbox-item">Tainan</div>
+        </div>
+    </div>
     <script type="text/javascript" src="tag.js"></script>
 </body>
 </html>
