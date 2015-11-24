@@ -1,5 +1,5 @@
-var tag = function() {
-    var input = document.getElementById("js-input-area");
+var tag = function(exports) {
+    var input = document.getElementById(exports.inputId);//"js-input-area"
     var fetchJSON = function(url, callback) {
         var httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
@@ -51,8 +51,12 @@ var tag = function() {
         matchCity: matchCity
     }
 
-}();
-
-tag.fetchJSON('https://raw.githubusercontent.com/kcliu/tag-widget/master/tz.json', function(data){
+};
+var tagInstance = tag(
+    {
+        inputId: "js-input-area"
+    }
+);
+tagInstance.fetchJSON('https://raw.githubusercontent.com/kcliu/tag-widget/master/tz.json', function(data){
     console.log(data);
 });
