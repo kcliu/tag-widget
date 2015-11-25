@@ -9,9 +9,19 @@
 <body>
     <h2>tag widget</h2>
     <div class="search-wrapper">
-        <label for="input-area">Search a City :</label>
-        <input type="text" id="js-input-area" class="input-area" oninput="tagInstance.searchCityHandler(this);">
-        <div id="js-taglist" class="taglist hide">
+        <div id="js-tags-container" class="tags-container">
+            <div class="tag">
+                <span id="js-tag-content">alabama</span>
+                <span class="tag-remove">x</span>
+            </div>
+            <div class="tag">
+                <span id="js-tag-content">tokyo</span>
+                <span class="tag-remove">x</span>
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <input type="text" id="js-input-area" class="input-area" oninput="tagInstance.searchCityHandler(this);">
+            <div id="js-taglist" class="taglist hide"/>
         </div>
     </div>
     <script type="text/javascript" src="tag.js"></script>
