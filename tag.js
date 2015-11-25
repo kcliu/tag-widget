@@ -1,15 +1,16 @@
 var tag = function(exports) {
     var inputDiv;
     var tagListDiv;
+    var tagsContainerDiv;
     var cityList;
 
     var init = function() {
         var source = exports.source || "https://raw.githubusercontent.com/kcliu/tag-widget/master/tz.json";
         var inputId = exports.inputId || "js-input-area";
         var tagListId = exports.tagListId || "js-taglist";
-
         inputDiv = document.getElementById(inputId);
         tagListDiv = document.getElementById(tagListId);
+        tagsContainerDiv = document.getElementById('js-tags-container');
 
         fetchJSON(source, function(data) {
             cityList = data.cities;
@@ -18,6 +19,7 @@ var tag = function(exports) {
 
         inputDiv.addEventListener("focus", function(event) {
             tagListDiv.classList.remove("hide");
+            createTagList(cityList);
         });
 
         inputDiv.addEventListener("blur", function(event) {
@@ -44,15 +46,37 @@ var tag = function(exports) {
         httpRequest.send("");
     }
 
-    var searchCityHandler= function(input) {
-        console.log("search city:" + input.value);
+    var searchCityHandler = function(input) {
         var subList = findMatch(input.value, cityList);
         createTagList(subList);
     }
 
+    var removeTag = function(e) {
+        var tagDiv = e.target.parentElement
+        tagDiv.parentElement.removeChild(tagDiv);
+    }
+
     var createTag = function(e) {
-        console.log("create tag:" + e.target.innerHTML);
-        inputDiv.value = e.target.innerHTML;
+        inputDiv.value = "";
+        createTagDiv(e.target.innerHTML);
+    }
+
+    var createTagDiv = function(tagName) {
+        var tagDiv;
+        var tagContent;
+        var removeBtn;
+        tagDiv = document.createElement("div");
+        removeBtn = document.createElement("span");
+
+        tagDiv.innerHTML = "<span id=\"js-tag-content\">" + tagName + "</span>";
+        tagDiv.classList.add("tag");
+
+        removeBtn.innerHTML = " x ";
+        removeBtn.classList.add("tag-remove");
+        removeBtn.addEventListener('click', removeTag, false);
+        tagDiv.appendChild(removeBtn);
+        tagsContainerDiv.appendChild(tagDiv);
+
     }
 
     var createTagList = function(list) {
@@ -71,7 +95,6 @@ var tag = function(exports) {
     }
 
     var findMatch = function(subString, dataList) {
-        console.log("findMatch:" + subString);
         var subList = [];
         var regex = new RegExp("^" + subString, "i");
 
@@ -80,13 +103,12 @@ var tag = function(exports) {
                 subList.push(dataList[index]);
             }
         }
-        console.log(subList);
         return subList;
     }
 
     return {
         init: init,
-        searchCityHandler: searchCityHandler,
+        searchCityHandler: searchCityHandler
     }
 
 };
