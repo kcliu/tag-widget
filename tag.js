@@ -1,6 +1,7 @@
 var tag = function(exports) {
     var inputDiv;
     var tagListDiv;
+    var cityList;
 
     var init = function() {
         var source = exports.source || "https://raw.githubusercontent.com/kcliu/tag-widget/master/tz.json";
@@ -11,7 +12,8 @@ var tag = function(exports) {
         tagListDiv = document.getElementById(tagListId);
 
         fetchJSON(source, function(data) {
-            createTagList(data.cities);
+            cityList = data.cities;
+            createTagList(cityList);
         });
 
         inputDiv.addEventListener("focus", function(event) {
@@ -44,7 +46,8 @@ var tag = function(exports) {
 
     var searchCityHandler= function(input) {
         console.log("search city:" + input.value);
-        return matchCity(input.value);
+        var subList = findMatch(input.value, cityList);
+        createTagList(subList);
     }
 
     var createTag = function(e) {
@@ -55,7 +58,7 @@ var tag = function(exports) {
     var createTagList = function(list) {
         //https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
         var docfrag = document.createDocumentFragment();
-
+        tagListDiv.innerHTML = "";
         for (var index in list) {
             var tagDiv = document.createElement("div");
             tagDiv.innerHTML = list[index];
@@ -67,16 +70,23 @@ var tag = function(exports) {
         tagListDiv.appendChild(docfrag);
     }
 
-    var matchCity = function(subString, dataList) {
-        console.log("matchCity:" + subString);
+    var findMatch = function(subString, dataList) {
+        console.log("findMatch:" + subString);
+        var subList = [];
+        var regex = new RegExp("^" + subString, "i");
 
+        for (var index in dataList) {
+            if (regex.test(dataList[index])) {
+                subList.push(dataList[index]);
+            }
+        }
+        console.log(subList);
+        return subList;
     }
 
     return {
         init: init,
-        fetchJSON: fetchJSON,
         searchCityHandler: searchCityHandler,
-        matchCity: matchCity
     }
 
 };
