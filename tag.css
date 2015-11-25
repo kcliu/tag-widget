@@ -8,7 +8,7 @@
     line-height: 20px;
 }
 
-.tagbox {
+.taglist {
     position: absolute;
     display: block;
     padding: 1px;
@@ -20,16 +20,16 @@
     max-height: 100px;
 }
 
-.tagbox-item {
+.taglist-item {
     width: 500px;
     height: 20px;
 }
 
-.tagbox-item.selected {
+.taglist-item.selected {
     background: orange;
 }
 
-.tagbox-item:hover {
+.taglist-item:hover {
     cursor: default;
     background: orange;
 }
