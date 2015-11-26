@@ -11,23 +11,26 @@ var tag = function(exports) {
         inputDiv = document.getElementById(inputId);
         tagListDiv = document.getElementById(tagListId);
         tagsContainerDiv = document.getElementById('js-tags-container');
+        fakeTextArea = document.getElementById("js-search-wrapper");
 
         fetchJSON(source, function(data) {
             cityList = data.cities;
             createTagList(cityList);
         });
 
-        inputDiv.addEventListener("focus", function(event) {
-            tagListDiv.classList.remove("hide");
-            createTagList(cityList);
-        });
-
-        inputDiv.addEventListener("blur", function(event) {
+        fakeTextArea.addEventListener("blur", function(event) {
             window.setTimeout(function() {
                 // http://caniuse.com/#feat=classlist
                 tagListDiv.classList.add("hide");
             }, 10);
         });
+
+        fakeTextArea.addEventListener("click", function(event) {
+            tagListDiv.classList.remove("hide");
+            createTagList(cityList);
+            inputDiv.focus();
+        });
+
     }
 
     var fetchJSON = function(url, callback) {
