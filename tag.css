@@ -22,6 +22,10 @@
     border: none;
 }
 
+input:focus {
+    outline: 0;
+}
+
 .taglist {
     position: absolute;
     display: block;
